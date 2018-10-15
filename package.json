@@ -4,5 +4,8 @@
   "main": "index.js",
   "repository": "git@github.com:karkipy/react-nepali-date-picker.git",
   "author": "Aashish Karki <aashish.y2z@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "nepali-date": "^0.1.3"
+  }
 }
