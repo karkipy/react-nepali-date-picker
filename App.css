@@ -1,0 +1,37 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.main-calendar-container {
+  width: 545px;
+  height: 418px;
+  background-color: #596571;
+  border-radius: 2%;
+  padding-top: 1px;
+  margin-top: -1px;
+}
+
+.calendar-header {
+  width: 90%;
+  margin: auto;
+  margin-top: 5%;
+}
+.calendar-header-one{
+  display: inline;
+  margin-right: 35%;
+}
+
+.select-container{
+  color: white;
+}
+
+.calendar-content-container {
+  width: 88%;
+  margin: auto;
+}
+
+.weekdays-container {
+  width: 100%;
+  margin-top: 5%;
+}

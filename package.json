@@ -6,6 +6,7 @@
   "author": "Aashish Karki <aashish.y2z@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@material-ui/core": "^3.2.2",
     "nepali-date": "^0.1.3"
   }
 }
