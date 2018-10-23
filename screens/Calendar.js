@@ -2,8 +2,15 @@ import React, { Component } from 'react';
 import homeWhite from './img/home_white.png';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
+import { clone } from 'lodash';
+import Day from './Day';
 import { convertDate } from './CalendarHelper/__calendarHelper';
-import { englishMonth, nepaliMonth, DATE_TYPE_BS } from './CalendarHelper/CalendarConstant';
+import {
+  nepaliMonth,
+  englishMonth,
+  DATE_TYPE_BS,
+  NUM_OF_WEEKS,
+} from './CalendarHelper/CalendarConstant';
 import WeekHeader from './WeekHeader';
 window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
 
@@ -11,6 +18,7 @@ class Calendar extends Component {
   constructor(props) {
     super(props);
     const date = convertDate(new Date(), DATE_TYPE_BS);
+    const selectedDate = convertDate(new Date(), DATE_TYPE_BS);
     const monthList = nepaliMonth;
     this.state = {
       theme: props.theme || 'dark',
@@ -19,6 +27,7 @@ class Calendar extends Component {
       monthList,
       currentMonth: monthList[date.getMonth()],
       currentYear: date.getYear(),
+      selectedDate,
     }
   }
 
@@ -36,9 +45,69 @@ class Calendar extends Component {
     });
   }
 
+  changeMonth(currentMonth) {
+    const { date, monthList } = this.state;
+    const nextMonth = monthList.indexOf(currentMonth);
+    date.setMonth(nextMonth);
+    this.setState({ currentMonth })
+  }
+
+  changeYear(currentYear) {
+    const { date } = this.state;
+    date.setYear(currentYear);
+    this.setState({ currentYear });
+  }
+
+  changeSelectedDate(date) {
+    const { dateType } = this.state;
+    this.setState({
+      selectedDate: convertDate(date, dateType),
+    })
+  }
+
+  getWeekDays(currentDate) {
+    const { date, selectedDate } = this.state;
+    const days = [];
+    const calendarDate = currentDate;
+    for (let c = 0; c < 7; c += 1) {
+      days.push(
+        <Day
+          key={calendarDate}
+          date={clone(calendarDate)}
+          value={calendarDate.getDate()}
+          isCurrentMonth={date.getMonth() === calendarDate.getMonth()}
+          isSelectedDate={date.getMonth() === selectedDate.getMonth()
+            && calendarDate.getDate() === selectedDate.getDate()
+            && calendarDate.getYear() === selectedDate.getYear()
+          }
+          onChange={d => this.changeSelectedDate(d)}
+        />,
+      );
+      calendarDate.setDate(calendarDate.getDate() + 1);
+    }
+    return days;
+  }
+
   render() {
     const { dateType, date, monthList, currentMonth, currentYear } = this.state;
     const yearList = date.getYearList();
+    const startingDate = date.getStartingDate();
+
+    const calendarData = [];
+    for (let r = 0; r < NUM_OF_WEEKS; r += 1) {
+      const calendarRow = (
+        <div
+          key={startingDate}
+          style={{ margin: '20px 0px' }}
+        >
+          {this.getWeekDays(startingDate)}
+        </div>
+
+      );
+      calendarData.push(calendarRow);
+    }
+
+
     return (
       <div style={{ marginLeft: '200px',
         marginTop: '50px'}}>
@@ -69,23 +138,21 @@ class Calendar extends Component {
               {/* Month Selection */}
               <Select
                 value={currentMonth}
-                onChange={event => this.setState({ currentMonth : event.target.value})}
-                style={{ color: 'white', fontWeight:'bolder', fontSize: 18,  marginLeft: '18px' }}
+                onChange={event => this.changeMonth(event.target.value)}
+                style={{ color: 'white', fontWeight:'bolder', fontSize: 18,  marginRight: '15px' }}
               >
                 {
-                  monthList.map(m => (
+                  monthList.map((m, idx) => (
                     <MenuItem key={m} value={m}> {m} </MenuItem>
                   ))
                 }
-
               </Select>
 
               {/* Year Selection */}
-
               <Select
                 value={currentYear}
-                onChange={event => this.setState({ currentYear : event.target.value})}
-                style={{ color: 'white', fontWeight:'bolder', fontSize: 18,  marginLeft: '18px' }}
+                onChange={event => this.changeYear(event.target.value)}
+                style={{ color: 'white', fontWeight:'bolder', fontSize: 18}}
               >
                 {
                   yearList.map(m => (
@@ -94,13 +161,15 @@ class Calendar extends Component {
                 }
 
               </Select>
-
             </div>
 
-
+            {/* Calendar Contents */}
             <div className="calendar-content-container">
               <div className="weekdays-container">
                 <WeekHeader />
+              </div>
+              <div className="calendar-contents">
+                  {calendarData}
               </div>
             </div>
           </div>

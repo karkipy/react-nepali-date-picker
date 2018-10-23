@@ -34,4 +34,9 @@
 .weekdays-container {
   width: 100%;
   margin-top: 5%;
+  margin-left: 4%;
+}
+
+.calendar-contents {
+  width: 100%;
 }

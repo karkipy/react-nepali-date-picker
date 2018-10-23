@@ -37,6 +37,10 @@ class EnglishCalendar implements Calendar {
     return this.date.getFullYear();
   }
 
+  getDate() {
+    return this.date.getDate();
+  }
+
   getYearList() {
     const yearList = [];
     let currentDate = new EnglishCalendar(new Date());
@@ -48,9 +52,14 @@ class EnglishCalendar implements Calendar {
     return yearList;
   }
 
-  getDate() {
-    return this.date.getDate();
+  setMonth(month) {
+    this.date.setMonth(month);
   }
+
+  setYear(year) {
+    this.date.setYear(year);
+  }
+
 
   format(format) {
     const year = this.getYear();

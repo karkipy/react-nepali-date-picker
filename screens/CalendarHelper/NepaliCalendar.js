@@ -37,6 +37,10 @@ class NepaliCalendar implements Calendar {
     return this.date.getYear();
   }
 
+  getDate() {
+    return this.date.getDate();
+  }
+
   getYearList() {
     const yearList = [];
     let currentDate = new NepaliCalendar(new Date());
@@ -46,6 +50,14 @@ class NepaliCalendar implements Calendar {
       yearStart += 1;
     }
     return yearList;
+  }
+
+  setMonth(month) {
+    this.date.setMonth(month);
+  }
+
+  setYear(year) {
+    this.date.setYear(year);
   }
 
   format(format) {
