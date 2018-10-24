@@ -1,12 +1,11 @@
 // @flow
 import React, { Component } from 'react';
-import '../Calendar.css';
+import './Calendar.css';
 import { clone } from 'lodash';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import Day from './Day';
-import homeWhite from './img/home_white.png';
 import { convertDate } from './CalendarHelper/__calendarHelper';
 import {
   nepaliMonth,
@@ -153,19 +152,6 @@ class Calendar extends Component<Props> {
           <div className="calendar-container">
             <div className="calendar-header">
               <div className="calendar-header-one">
-                <div style={{
-                  display: 'inline',
-                }}
-                >
-                  <div style={{
-                    width: '28px',
-                    height: '20px',
-                    display: 'inline-block',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundImage: `url(${homeWhite})`,
-                  }}
-                  />
-                </div>
                 <Select
                   value={dateType}
                   onChange={event => this.changeDateType(event.target.value)}

@@ -1,0 +1,12 @@
+{
+  "presets": ["@babel/preset-react", "@babel/preset-flow", "@babel/preset-env"],
+  "plugins": [
+    "transform-class-properties",
+    "@babel/plugin-proposal-object-rest-spread",
+    "css-modules-transform",
+    ["transform-assets", {
+      "extensions": ["png"],
+      "name": "[name].[ext]?[sha512:hash:base64:7]"
+    }]
+  ]
+}
