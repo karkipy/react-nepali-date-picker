@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import { FONT_GREY } from './CalendarHelper/CalendarConstant';
 
 type Props = {
   date: Date,
@@ -7,18 +8,20 @@ type Props = {
   onChange: Date => void;
   isCurrentMonth: boolean,
   isSelectedDate: boolean,
+  fontColor: string,
 }
 
 const Day = ({
-  date, value, isCurrentMonth, isSelectedDate, onChange,
+  date, value, isCurrentMonth, isSelectedDate, onChange, fontColor,
 }: Props) => (
   <div
     style={{
       width: `${100 / 7}%`,
-      color: isCurrentMonth ? 'white' : '#888888',
+      // eslint-disable-next-line
+      color: isCurrentMonth ? ( isSelectedDate ? 'white' : fontColor ) : FONT_GREY,
       alignItems: 'center',
       display: 'inline-block',
-      backgroundColor: isSelectedDate ? '#3333CC' : null,
+      backgroundColor: isSelectedDate && isCurrentMonth ? '#3333CC' : null,
     }}
   >
     <center>

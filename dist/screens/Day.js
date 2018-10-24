@@ -7,6 +7,8 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
+var _CalendarConstant = require("./CalendarHelper/CalendarConstant");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Day = function Day(_ref) {
@@ -14,14 +16,16 @@ var Day = function Day(_ref) {
       value = _ref.value,
       isCurrentMonth = _ref.isCurrentMonth,
       isSelectedDate = _ref.isSelectedDate,
-      onChange = _ref.onChange;
+      onChange = _ref.onChange,
+      fontColor = _ref.fontColor;
   return _react.default.createElement("div", {
     style: {
       width: "".concat(100 / 7, "%"),
-      color: isCurrentMonth ? 'white' : '#888888',
+      // eslint-disable-next-line
+      color: isCurrentMonth ? isSelectedDate ? 'white' : fontColor : _CalendarConstant.FONT_GREY,
       alignItems: 'center',
       display: 'inline-block',
-      backgroundColor: isSelectedDate ? '#3333CC' : null
+      backgroundColor: isSelectedDate && isCurrentMonth ? '#3333CC' : null
     }
   }, _react.default.createElement("center", null, _react.default.createElement("button", {
     type: "button",

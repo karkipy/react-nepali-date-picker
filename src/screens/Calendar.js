@@ -8,10 +8,14 @@ import Button from '@material-ui/core/Button';
 import Day from './Day';
 import { convertDate } from './CalendarHelper/__calendarHelper';
 import {
+  DARK,
+  COLOR_DARK,
+  COLOR_LIGHT,
   nepaliMonth,
   englishMonth,
   DATE_TYPE_BS,
   NUM_OF_WEEKS,
+  FONT_COLOR_DARK,
 } from './CalendarHelper/CalendarConstant';
 import WeekHeader from './WeekHeader';
 
@@ -45,7 +49,7 @@ class Calendar extends Component<Props> {
 
 
   getWeekDays(currentDate) {
-    const { date, selectedDate } = this.state;
+    const { date, selectedDate, theme } = this.state;
     const days = [];
     const calendarDate = currentDate;
     for (let c = 0; c < 7; c += 1) {
@@ -60,6 +64,7 @@ class Calendar extends Component<Props> {
             && calendarDate.getYear() === selectedDate.getYear()
           }
           onChange={d => this.changeSelectedDate(d)}
+          fontColor={ theme === DARK ? COLOR_LIGHT : FONT_COLOR_DARK }
         />,
       );
       calendarDate.setDate(calendarDate.getDate() + 1);
@@ -108,7 +113,7 @@ class Calendar extends Component<Props> {
     });
 
     if (onSelect) {
-      onSelect(selectedDate);
+      onSelect(selectedDate.date);
     }
   }
 
@@ -121,6 +126,7 @@ class Calendar extends Component<Props> {
       currentYear,
       currentMonth,
       selectedDate,
+      theme,
     } = this.state;
     const { onCancel, onChange } = this.props;
     const yearList = date.getYearList();
@@ -143,12 +149,11 @@ class Calendar extends Component<Props> {
 
 
     return (
-      <div style={{
-        marginLeft: '200px',
-        marginTop: '50px',
-      }}
-      >
-        <div className="main-calendar-container">
+      <div>
+        <div
+          className="main-calendar-container"
+          style={{ backgroundColor: theme === DARK ? COLOR_DARK : COLOR_LIGHT }}
+        >
           <div className="calendar-container">
             <div className="calendar-header">
               <div className="calendar-header-one">
@@ -156,41 +161,54 @@ class Calendar extends Component<Props> {
                   value={dateType}
                   onChange={event => this.changeDateType(event.target.value)}
                   style={{
-                    color: 'white', fontWeight: 'bolder', fontSize: 18, marginLeft: '18px',
+                    color: theme === DARK ? COLOR_LIGHT : FONT_COLOR_DARK,
+                    fontWeight: 'bolder',
+                    fontSize: 18,
+                    marginLeft: '18px',
                   }}
                 >
                   <MenuItem value="B.S"> B.S </MenuItem>
                   <MenuItem value="A.D"> A.D </MenuItem>
                 </Select>
               </div>
-              {/* Month Selection */}
-              <Select
-                value={currentMonth}
-                onChange={event => this.changeMonth(event.target.value)}
-                style={{
-                  color: 'white', fontWeight: 'bolder', fontSize: 18, marginRight: '15px',
-                }}
-              >
-                {
-                  monthList.map(m => (
-                    <MenuItem key={m} value={m}> {m} </MenuItem>
-                  ))
-                }
-              </Select>
 
-              {/* Year Selection */}
-              <Select
-                value={currentYear}
-                onChange={event => this.changeYear(event.target.value)}
-                style={{ color: 'white', fontWeight: 'bolder', fontSize: 18 }}
-              >
-                {
-                  yearList.map(m => (
-                    <MenuItem key={m} value={m}> {m} </MenuItem>
-                  ))
-                }
+              <div style={{ display: 'inline-block', float: 'right' }}>
+                {/* Month Selection */}
+                <Select
+                  value={currentMonth}
+                  onChange={event => this.changeMonth(event.target.value)}
+                  style={{
+                    color: theme === DARK ? COLOR_LIGHT : FONT_COLOR_DARK,
+                    fontWeight: 'bolder',
+                    fontSize: 18,
+                    marginRight: '15px',
+                  }}
+                >
+                  {
+                    monthList.map(m => (
+                      <MenuItem key={m} value={m}> {m} </MenuItem>
+                    ))
+                  }
+                </Select>
 
-              </Select>
+                {/* Year Selection */}
+                <Select
+                  value={currentYear}
+                  onChange={event => this.changeYear(event.target.value)}
+                  style={{
+                    color: theme === DARK ? COLOR_LIGHT : FONT_COLOR_DARK,
+                    fontWeight: 'bolder',
+                    fontSize: 18,
+                  }}
+                >
+                  {
+                    yearList.map(m => (
+                      <MenuItem key={m} value={m}> {m} </MenuItem>
+                    ))
+                  }
+
+                </Select>
+              </div>
             </div>
 
             {/* Calendar Contents */}
@@ -205,12 +223,19 @@ class Calendar extends Component<Props> {
               {onCancel && onChange && (
               <div className="calendar-button">
                 <div className="calendar-button-contents">
-                  <Button variant="contained" color="primary" onClick={() => onChange(selectedDate)}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => onChange(selectedDate.date)}
+                  >
                     Ok
                   </Button>
                 </div>
                 <div className="calendar-button-contents">
-                  <Button variant="contained" onClick={() => onCancel(date)}>
+                  <Button
+                    variant="contained"
+                    onClick={() => onCancel(date.date)}
+                  >
                     Cancel
                   </Button>
                 </div>

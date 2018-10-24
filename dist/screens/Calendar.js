@@ -81,7 +81,8 @@ function (_Component) {
 
       var _this$state = this.state,
           date = _this$state.date,
-          selectedDate = _this$state.selectedDate;
+          selectedDate = _this$state.selectedDate,
+          theme = _this$state.theme;
       var days = [];
       var calendarDate = currentDate;
 
@@ -94,7 +95,8 @@ function (_Component) {
           isSelectedDate: date.getMonth() === selectedDate.getMonth() && calendarDate.getDate() === selectedDate.getDate() && calendarDate.getYear() === selectedDate.getYear(),
           onChange: function onChange(d) {
             return _this2.changeSelectedDate(d);
-          }
+          },
+          fontColor: theme === _CalendarConstant.DARK ? _CalendarConstant.COLOR_LIGHT : _CalendarConstant.FONT_COLOR_DARK
         }));
         calendarDate.setDate(calendarDate.getDate() + 1);
       }
@@ -150,7 +152,7 @@ function (_Component) {
       });
 
       if (onSelect) {
-        onSelect(selectedDate);
+        onSelect(selectedDate.date);
       }
     }
   }, {
@@ -164,7 +166,8 @@ function (_Component) {
           monthList = _this$state3.monthList,
           currentYear = _this$state3.currentYear,
           currentMonth = _this$state3.currentMonth,
-          selectedDate = _this$state3.selectedDate;
+          selectedDate = _this$state3.selectedDate,
+          theme = _this$state3.theme;
       var _this$props = this.props,
           onCancel = _this$props.onCancel,
           onChange = _this$props.onChange;
@@ -183,13 +186,11 @@ function (_Component) {
         calendarData.push(calendarRow);
       }
 
-      return _react.default.createElement("div", {
+      return _react.default.createElement("div", null, _react.default.createElement("div", {
+        className: "main-calendar-container",
         style: {
-          marginLeft: '200px',
-          marginTop: '50px'
+          backgroundColor: theme === _CalendarConstant.DARK ? _CalendarConstant.COLOR_DARK : _CalendarConstant.COLOR_LIGHT
         }
-      }, _react.default.createElement("div", {
-        className: "main-calendar-container"
       }, _react.default.createElement("div", {
         className: "calendar-container"
       }, _react.default.createElement("div", {
@@ -202,7 +203,7 @@ function (_Component) {
           return _this3.changeDateType(event.target.value);
         },
         style: {
-          color: 'white',
+          color: theme === _CalendarConstant.DARK ? _CalendarConstant.COLOR_LIGHT : _CalendarConstant.FONT_COLOR_DARK,
           fontWeight: 'bolder',
           fontSize: 18,
           marginLeft: '18px'
@@ -211,13 +212,18 @@ function (_Component) {
         value: "B.S"
       }, " B.S "), _react.default.createElement(_MenuItem.default, {
         value: "A.D"
-      }, " A.D "))), _react.default.createElement(_Select.default, {
+      }, " A.D "))), _react.default.createElement("div", {
+        style: {
+          display: 'inline-block',
+          float: 'right'
+        }
+      }, _react.default.createElement(_Select.default, {
         value: currentMonth,
         onChange: function onChange(event) {
           return _this3.changeMonth(event.target.value);
         },
         style: {
-          color: 'white',
+          color: theme === _CalendarConstant.DARK ? _CalendarConstant.COLOR_LIGHT : _CalendarConstant.FONT_COLOR_DARK,
           fontWeight: 'bolder',
           fontSize: 18,
           marginRight: '15px'
@@ -233,7 +239,7 @@ function (_Component) {
           return _this3.changeYear(event.target.value);
         },
         style: {
-          color: 'white',
+          color: theme === _CalendarConstant.DARK ? _CalendarConstant.COLOR_LIGHT : _CalendarConstant.FONT_COLOR_DARK,
           fontWeight: 'bolder',
           fontSize: 18
         }
@@ -242,7 +248,7 @@ function (_Component) {
           key: m,
           value: m
         }, " ", m, " ");
-      }))), _react.default.createElement("div", {
+      })))), _react.default.createElement("div", {
         className: "calendar-content-container"
       }, _react.default.createElement("div", {
         className: "weekdays-container"
@@ -256,14 +262,14 @@ function (_Component) {
         variant: "contained",
         color: "primary",
         onClick: function onClick() {
-          return onChange(selectedDate);
+          return onChange(selectedDate.date);
         }
       }, "Ok")), _react.default.createElement("div", {
         className: "calendar-button-contents"
       }, _react.default.createElement(_Button.default, {
         variant: "contained",
         onClick: function onClick() {
-          return onCancel(date);
+          return onCancel(date.date);
         }
       }, "Cancel")))))));
     }
