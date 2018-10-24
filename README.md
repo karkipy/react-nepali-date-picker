@@ -1,6 +1,6 @@
 # react-nepali-date-picker
 
-###Introduction
+### Introduction
 
 React Nepali Date Picker is a widget for react , this is a typical calendar picker , but provides the option to switch calendar type from B.S to A.D.
 
