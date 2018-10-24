@@ -28,13 +28,15 @@ type Props = {
   onChange: () => Date,
   onCancel: () => Date,
   theme: string,
+  date: Date,
 }
 
 class Calendar extends Component<Props> {
   constructor(props) {
     super(props);
-    const date = convertDate(new Date(), DATE_TYPE_BS);
-    const selectedDate = convertDate(new Date(), DATE_TYPE_BS);
+    const refDate = props.date || new Date();
+    const date = convertDate(refDate, DATE_TYPE_BS);
+    const selectedDate = convertDate(refDate, DATE_TYPE_BS);
     const monthList = nepaliMonth;
     this.state = {
       theme: props.theme || 'dark',
@@ -145,6 +147,18 @@ class Calendar extends Component<Props> {
 
       );
       calendarData.push(calendarRow);
+    }
+
+    if (startingDate.getMonth() === date.getMonth()) {
+      // if the month has more than 5 weeks
+      calendarData.push(
+        <div
+          key={startingDate}
+          style={{ margin: '20px 0px' }}
+        >
+          {this.getWeekDays(startingDate)}
+        </div>,
+      );
     }
 
 

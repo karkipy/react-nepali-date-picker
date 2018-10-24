@@ -59,8 +59,9 @@ function (_Component) {
     _classCallCheck(this, Calendar);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Calendar).call(this, props));
-    var date = (0, _calendarHelper.convertDate)(new Date(), _CalendarConstant.DATE_TYPE_BS);
-    var selectedDate = (0, _calendarHelper.convertDate)(new Date(), _CalendarConstant.DATE_TYPE_BS);
+    var refDate = props.date || new Date();
+    var date = (0, _calendarHelper.convertDate)(refDate, _CalendarConstant.DATE_TYPE_BS);
+    var selectedDate = (0, _calendarHelper.convertDate)(refDate, _CalendarConstant.DATE_TYPE_BS);
     var monthList = _CalendarConstant.nepaliMonth;
     _this.state = {
       theme: props.theme || 'dark',
@@ -184,6 +185,16 @@ function (_Component) {
         }, this.getWeekDays(startingDate));
 
         calendarData.push(calendarRow);
+      }
+
+      if (startingDate.getMonth() === date.getMonth()) {
+        // if the month has more than 5 weeks
+        calendarData.push(_react.default.createElement("div", {
+          key: startingDate,
+          style: {
+            margin: '20px 0px'
+          }
+        }, this.getWeekDays(startingDate)));
       }
 
       return _react.default.createElement("div", null, _react.default.createElement("div", {
