@@ -2,11 +2,16 @@
 import React from 'react';
 
 type Props = {
+  date: Date,
   value: number,
+  onChange: Date => void;
   isCurrentMonth: boolean,
+  isSelectedDate: boolean,
 }
 
-const Day = ({ date,value, isCurrentMonth, isSelectedDate, onChange }: Props) => (
+const Day = ({
+  date, value, isCurrentMonth, isSelectedDate, onChange,
+}: Props) => (
   <div
     style={{
       width: `${100 / 7}%`,
@@ -16,23 +21,24 @@ const Day = ({ date,value, isCurrentMonth, isSelectedDate, onChange }: Props) =>
       backgroundColor: isSelectedDate ? '#3333CC' : null,
     }}
   >
-  <center>
-    <button
-      style={{
-      border: 'none',
-      width: '80%',
-      background: 'none',
-	    color: 'inherit',
-      padding: 0,
-      font: 'inherit',
-      cursor: 'pointer',
-      outline: 'inherit',
+    <center>
+      <button
+        type="button"
+        style={{
+          border: 'none',
+          width: '80%',
+          background: 'none',
+          color: 'inherit',
+          padding: 0,
+          font: 'inherit',
+          cursor: 'pointer',
+          outline: 'inherit',
         }}
-      onClick={() => onChange(date)}
-    >
-      {value}
-    </button>
-  </center>
+        onClick={() => onChange(date)}
+      >
+        {value}
+      </button>
+    </center>
   </div>
 );
 

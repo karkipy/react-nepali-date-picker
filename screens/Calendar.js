@@ -1,11 +1,12 @@
 // @flow
 import React, { Component } from 'react';
-import homeWhite from './img/home_white.png';
+import '../Calendar.css';
+import { clone } from 'lodash';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
-import { clone } from 'lodash';
 import Day from './Day';
+import homeWhite from './img/home_white.png';
 import { convertDate } from './CalendarHelper/__calendarHelper';
 import {
   nepaliMonth,
@@ -14,12 +15,16 @@ import {
   NUM_OF_WEEKS,
 } from './CalendarHelper/CalendarConstant';
 import WeekHeader from './WeekHeader';
+
+
+// eslint-disable-next-line
 window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
 
 type Props = {
   onSelect: () => Date,
   onChange: () => Date,
   onCancel: () => Date,
+  theme: string,
 }
 
 class Calendar extends Component<Props> {
@@ -36,48 +41,9 @@ class Calendar extends Component<Props> {
       currentMonth: monthList[date.getMonth()],
       currentYear: date.getYear(),
       selectedDate,
-    }
+    };
   }
 
-  changeDateType(dateType) {
-    // eslint-disable-next-line
-    const selectedDate = this.state.date;
-    const date = convertDate(selectedDate.date, dateType);
-    const monthList = DATE_TYPE_BS === dateType ? nepaliMonth : englishMonth;
-    const currentMonth = DATE_TYPE_BS === dateType ? nepaliMonth[date.getMonth()] : englishMonth[date.getMonth()];
-    const currentYear = date.getYear();
-    this.setState({
-      dateType,
-      date,
-      monthList,
-      currentMonth,
-      currentYear,
-    });
-  }
-
-  changeMonth(currentMonth) {
-    const { date, monthList } = this.state;
-    const nextMonth = monthList.indexOf(currentMonth);
-    date.setMonth(nextMonth);
-    this.setState({ currentMonth })
-  }
-
-  changeYear(currentYear) {
-    const { date } = this.state;
-    date.setYear(currentYear);
-    this.setState({ currentYear });
-  }
-
-  changeSelectedDate(date) {
-    const { dateType } = this.state;
-    const { onSelect } = this.props;
-    const selectedDate = convertDate(date, dateType);
-    this.setState({
-      selectedDate,
-    })
-
-    onSelect && onSelect(selectedDate);
-  }
 
   getWeekDays(currentDate) {
     const { date, selectedDate } = this.state;
@@ -102,8 +68,61 @@ class Calendar extends Component<Props> {
     return days;
   }
 
+
+  changeDateType(dateType) {
+    // eslint-disable-next-line
+    const selectedDate = this.state.date;
+    const date = convertDate(selectedDate.date, dateType);
+    const monthList = DATE_TYPE_BS === dateType ? nepaliMonth : englishMonth;
+    const currentMonth = DATE_TYPE_BS === dateType
+      ? nepaliMonth[date.getMonth()]
+      : englishMonth[date.getMonth()];
+    const currentYear = date.getYear();
+    this.setState({
+      dateType,
+      date,
+      monthList,
+      currentMonth,
+      currentYear,
+    });
+  }
+
+  changeMonth(currentMonth) {
+    const { date, monthList } = this.state;
+    const nextMonth = monthList.indexOf(currentMonth);
+    date.setMonth(nextMonth);
+    this.setState({ currentMonth });
+  }
+
+  changeYear(currentYear) {
+    const { date } = this.state;
+    date.setYear(currentYear);
+    this.setState({ currentYear });
+  }
+
+  changeSelectedDate(date) {
+    const { dateType } = this.state;
+    const { onSelect } = this.props;
+    const selectedDate = convertDate(date, dateType);
+    this.setState({
+      selectedDate,
+    });
+
+    if (onSelect) {
+      onSelect(selectedDate);
+    }
+  }
+
+
   render() {
-    const { dateType, date, monthList, currentMonth, currentYear, selectedDate } = this.state;
+    const {
+      date,
+      dateType,
+      monthList,
+      currentYear,
+      currentMonth,
+      selectedDate,
+    } = this.state;
     const { onCancel, onChange } = this.props;
     const yearList = date.getYearList();
     const startingDate = date.getStartingDate();
@@ -125,27 +144,34 @@ class Calendar extends Component<Props> {
 
 
     return (
-      <div style={{ marginLeft: '200px',
-        marginTop: '50px'}}>
+      <div style={{
+        marginLeft: '200px',
+        marginTop: '50px',
+      }}
+      >
         <div className="main-calendar-container">
           <div className="calendar-container">
-            <div className="calendar-header" >
+            <div className="calendar-header">
               <div className="calendar-header-one">
                 <div style={{
-                    display: 'inline',
-                  }}>
+                  display: 'inline',
+                }}
+                >
                   <div style={{
                     width: '28px',
                     height: '20px',
                     display: 'inline-block',
                     backgroundRepeat: 'no-repeat',
-                    backgroundImage: `url(${homeWhite})`
-                  }} />
+                    backgroundImage: `url(${homeWhite})`,
+                  }}
+                  />
                 </div>
                 <Select
                   value={dateType}
                   onChange={event => this.changeDateType(event.target.value)}
-                  style={{ color: 'white', fontWeight:'bolder', fontSize: 18, marginLeft: '18px' }}
+                  style={{
+                    color: 'white', fontWeight: 'bolder', fontSize: 18, marginLeft: '18px',
+                  }}
                 >
                   <MenuItem value="B.S"> B.S </MenuItem>
                   <MenuItem value="A.D"> A.D </MenuItem>
@@ -155,10 +181,12 @@ class Calendar extends Component<Props> {
               <Select
                 value={currentMonth}
                 onChange={event => this.changeMonth(event.target.value)}
-                style={{ color: 'white', fontWeight:'bolder', fontSize: 18,  marginRight: '15px' }}
+                style={{
+                  color: 'white', fontWeight: 'bolder', fontSize: 18, marginRight: '15px',
+                }}
               >
                 {
-                  monthList.map((m, idx) => (
+                  monthList.map(m => (
                     <MenuItem key={m} value={m}> {m} </MenuItem>
                   ))
                 }
@@ -168,7 +196,7 @@ class Calendar extends Component<Props> {
               <Select
                 value={currentYear}
                 onChange={event => this.changeYear(event.target.value)}
-                style={{ color: 'white', fontWeight:'bolder', fontSize: 18}}
+                style={{ color: 'white', fontWeight: 'bolder', fontSize: 18 }}
               >
                 {
                   yearList.map(m => (
@@ -185,10 +213,10 @@ class Calendar extends Component<Props> {
                 <WeekHeader />
               </div>
               <div className="calendar-contents">
-                  {calendarData}
+                { calendarData }
               </div>
 
-              {onCancel && onChange &&(
+              {onCancel && onChange && (
               <div className="calendar-button">
                 <div className="calendar-button-contents">
                   <Button variant="contained" color="primary" onClick={() => onChange(selectedDate)}>
@@ -203,9 +231,6 @@ class Calendar extends Component<Props> {
               </div>
               )
             }
-
-
-
             </div>
           </div>
         </div>
