@@ -5,11 +5,12 @@
 
 .main-calendar-container {
   width: 545px;
-  height: 418px;
+  height: auto;
   background-color: #596571;
   border-radius: 2%;
   padding-top: 1px;
   margin-top: -1px;
+  margin-bottom: 10px;
 }
 
 .calendar-header {
@@ -29,12 +30,27 @@
 .calendar-content-container {
   width: 88%;
   margin: auto;
+  padding-bottom: 20px;
 }
 
 .weekdays-container {
   width: 100%;
   margin-top: 5%;
   margin-left: 4%;
+}
+
+.calendar-button {
+  width: 100%;
+  margin-left: 30%;
+}
+
+.calendar-button-contents{
+  display: inline;
+  margin: 0 10px;
+}
+
+.buttonCalendar {
+  margin-right: 10px;
 }
 
 .calendar-contents {

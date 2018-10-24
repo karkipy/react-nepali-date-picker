@@ -1,7 +1,9 @@
+// @flow
 import React, { Component } from 'react';
 import homeWhite from './img/home_white.png';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
+import Button from '@material-ui/core/Button';
 import { clone } from 'lodash';
 import Day from './Day';
 import { convertDate } from './CalendarHelper/__calendarHelper';
@@ -14,7 +16,13 @@ import {
 import WeekHeader from './WeekHeader';
 window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
 
-class Calendar extends Component {
+type Props = {
+  onSelect: () => Date,
+  onChange: () => Date,
+  onCancel: () => Date,
+}
+
+class Calendar extends Component<Props> {
   constructor(props) {
     super(props);
     const date = convertDate(new Date(), DATE_TYPE_BS);
@@ -32,7 +40,9 @@ class Calendar extends Component {
   }
 
   changeDateType(dateType) {
-    const date = convertDate(new Date(), dateType);
+    // eslint-disable-next-line
+    const selectedDate = this.state.date;
+    const date = convertDate(selectedDate.date, dateType);
     const monthList = DATE_TYPE_BS === dateType ? nepaliMonth : englishMonth;
     const currentMonth = DATE_TYPE_BS === dateType ? nepaliMonth[date.getMonth()] : englishMonth[date.getMonth()];
     const currentYear = date.getYear();
@@ -60,9 +70,13 @@ class Calendar extends Component {
 
   changeSelectedDate(date) {
     const { dateType } = this.state;
+    const { onSelect } = this.props;
+    const selectedDate = convertDate(date, dateType);
     this.setState({
-      selectedDate: convertDate(date, dateType),
+      selectedDate,
     })
+
+    onSelect && onSelect(selectedDate);
   }
 
   getWeekDays(currentDate) {
@@ -89,9 +103,11 @@ class Calendar extends Component {
   }
 
   render() {
-    const { dateType, date, monthList, currentMonth, currentYear } = this.state;
+    const { dateType, date, monthList, currentMonth, currentYear, selectedDate } = this.state;
+    const { onCancel, onChange } = this.props;
     const yearList = date.getYearList();
     const startingDate = date.getStartingDate();
+
 
     const calendarData = [];
     for (let r = 0; r < NUM_OF_WEEKS; r += 1) {
@@ -171,6 +187,25 @@ class Calendar extends Component {
               <div className="calendar-contents">
                   {calendarData}
               </div>
+
+              {onCancel && onChange &&(
+              <div className="calendar-button">
+                <div className="calendar-button-contents">
+                  <Button variant="contained" color="primary" onClick={() => onChange(selectedDate)}>
+                    Ok
+                  </Button>
+                </div>
+                <div className="calendar-button-contents">
+                  <Button variant="contained" onClick={() => onCancel(date)}>
+                    Cancel
+                  </Button>
+                </div>
+              </div>
+              )
+            }
+
+
+
             </div>
           </div>
         </div>

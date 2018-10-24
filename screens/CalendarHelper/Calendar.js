@@ -8,5 +8,7 @@ export interface Calendar {
   getNextMonth: () => Date;
   getPrevMonth: () => Date;
   getYearList: () => Array;
+  setMonth: () => void;
+  setYear: () => void;
   format: (String) => String;
 }
