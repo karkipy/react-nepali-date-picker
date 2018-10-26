@@ -15,7 +15,7 @@ npm i react-nepali-date-picker
 Calendar can be used to act as an input component as well. All the parameters are optional
 
 1) theme : type of theme i.e. dark or light default is dark
-2) date : send the date from which to show calendar with else default is the current date
+2) value : send the date from which to show calendar with else default is the current date
 3) onSelect : returns the value that has been selected or the date that user has clicked on
 4) onChange : returns the value user has selected and when the ok button is clicked
 5) onCancel : returns previous value which user had previously selected

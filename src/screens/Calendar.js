@@ -28,13 +28,13 @@ type Props = {
   onChange: () => Date,
   onCancel: () => Date,
   theme: string,
-  date: Date,
+  value: Date,
 }
 
 class Calendar extends Component<Props> {
   constructor(props) {
     super(props);
-    const refDate = props.date || new Date();
+    const refDate = props.value || new Date();
     const date = convertDate(refDate, DATE_TYPE_BS);
     const selectedDate = convertDate(refDate, DATE_TYPE_BS);
     const monthList = nepaliMonth;
