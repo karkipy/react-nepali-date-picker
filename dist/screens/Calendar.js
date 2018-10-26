@@ -59,7 +59,7 @@ function (_Component) {
     _classCallCheck(this, Calendar);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Calendar).call(this, props));
-    var refDate = props.date || new Date();
+    var refDate = props.value || new Date();
     var date = (0, _calendarHelper.convertDate)(refDate, _CalendarConstant.DATE_TYPE_BS);
     var selectedDate = (0, _calendarHelper.convertDate)(refDate, _CalendarConstant.DATE_TYPE_BS);
     var monthList = _CalendarConstant.nepaliMonth;
@@ -197,17 +197,33 @@ function (_Component) {
         }, this.getWeekDays(startingDate)));
       }
 
+      console.log('s');
       return _react.default.createElement("div", null, _react.default.createElement("div", {
         className: "main-calendar-container",
         style: {
-          backgroundColor: theme === _CalendarConstant.DARK ? _CalendarConstant.COLOR_DARK : _CalendarConstant.COLOR_LIGHT
+          backgroundColor: theme === _CalendarConstant.DARK ? _CalendarConstant.COLOR_DARK : _CalendarConstant.COLOR_LIGHT,
+          width: '545px',
+          height: 'auto',
+          borderRadius: '2%',
+          paddingTop: '1px',
+          marginTop: '-1px',
+          marginBottom: '10px'
         }
       }, _react.default.createElement("div", {
         className: "calendar-container"
       }, _react.default.createElement("div", {
-        className: "calendar-header"
+        className: "calendar-header",
+        style: {
+          width: '90%',
+          margin: 'auto',
+          marginTop: '5%'
+        }
       }, _react.default.createElement("div", {
-        className: "calendar-header-one"
+        className: "calendar-header-one",
+        style: {
+          display: 'inline',
+          marginRight: '40%'
+        }
       }, _react.default.createElement(_Select.default, {
         value: dateType,
         onChange: function onChange(event) {
@@ -260,15 +276,36 @@ function (_Component) {
           value: m
         }, " ", m, " ");
       })))), _react.default.createElement("div", {
-        className: "calendar-content-container"
+        className: "calendar-content-container",
+        style: {
+          width: '88%',
+          margin: 'auto',
+          paddingBottom: '20px'
+        }
       }, _react.default.createElement("div", {
-        className: "weekdays-container"
+        className: "weekdays-container",
+        style: {
+          width: '100%',
+          marginTop: '5%',
+          marginLeft: '4%'
+        }
       }, _react.default.createElement(_WeekHeader.default, null)), _react.default.createElement("div", {
-        className: "calendar-contents"
+        className: "calendar-contents",
+        style: {
+          width: '100%'
+        }
       }, calendarData), onCancel && onChange && _react.default.createElement("div", {
-        className: "calendar-button"
+        className: "calendar-button",
+        style: {
+          width: '100%',
+          marginLeft: '30%'
+        }
       }, _react.default.createElement("div", {
-        className: "calendar-button-contents"
+        className: "calendar-button-contents",
+        style: {
+          display: 'inline',
+          margin: '0 10px'
+        }
       }, _react.default.createElement(_Button.default, {
         variant: "contained",
         color: "primary",
@@ -276,7 +313,11 @@ function (_Component) {
           return onChange(selectedDate.date);
         }
       }, "Ok")), _react.default.createElement("div", {
-        className: "calendar-button-contents"
+        className: "calendar-button-contents",
+        style: {
+          display: 'inline',
+          margin: '0 10px'
+        }
       }, _react.default.createElement(_Button.default, {
         variant: "contained",
         onClick: function onClick() {

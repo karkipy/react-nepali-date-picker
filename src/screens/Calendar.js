@@ -160,17 +160,38 @@ class Calendar extends Component<Props> {
         </div>,
       );
     }
-
+    console.log('s');
 
     return (
       <div>
         <div
           className="main-calendar-container"
-          style={{ backgroundColor: theme === DARK ? COLOR_DARK : COLOR_LIGHT }}
+          style={{
+            backgroundColor: theme === DARK ? COLOR_DARK : COLOR_LIGHT,
+            width: '545px',
+            height: 'auto',
+            borderRadius: '2%',
+            paddingTop: '1px',
+            marginTop: '-1px',
+            marginBottom: '10px',
+          }}
         >
           <div className="calendar-container">
-            <div className="calendar-header">
-              <div className="calendar-header-one">
+            <div
+              className="calendar-header"
+              style={{
+                width: '90%',
+                margin: 'auto',
+                marginTop: '5%',
+              }}
+            >
+              <div
+                className="calendar-header-one"
+                style={{
+                  display: 'inline',
+                  marginRight: '40%',
+                }}
+                >
                 <Select
                   value={dateType}
                   onChange={event => this.changeDateType(event.target.value)}
@@ -226,17 +247,49 @@ class Calendar extends Component<Props> {
             </div>
 
             {/* Calendar Contents */}
-            <div className="calendar-content-container">
-              <div className="weekdays-container">
+            <div
+              className="calendar-content-container"
+              style={{
+                width: '88%',
+                margin: 'auto',
+                paddingBottom: '20px',
+              }}
+
+            >
+              <div
+                className="weekdays-container"
+                style={{
+                  width: '100%',
+                  marginTop: '5%',
+                  marginLeft: '4%',
+                }}
+              >
                 <WeekHeader />
               </div>
-              <div className="calendar-contents">
+              <div
+                className="calendar-contents"
+                style={{
+                  width: '100%',
+                }}
+              >
                 { calendarData }
               </div>
 
               {onCancel && onChange && (
-              <div className="calendar-button">
-                <div className="calendar-button-contents">
+              <div
+                className="calendar-button"
+                style={{
+                  width: '100%',
+                  marginLeft: '30%',
+                }}
+                >
+                <div
+                  className="calendar-button-contents"
+                  style={{
+                    display: 'inline',
+                    margin: '0 10px',
+                  }}
+                >
                   <Button
                     variant="contained"
                     color="primary"
@@ -245,7 +298,13 @@ class Calendar extends Component<Props> {
                     Ok
                   </Button>
                 </div>
-                <div className="calendar-button-contents">
+                <div
+                  className="calendar-button-contents"
+                  style={{
+                    display: 'inline',
+                    margin: '0 10px',
+                  }}
+                >
                   <Button
                     variant="contained"
                     onClick={() => onCancel(date.date)}
