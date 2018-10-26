@@ -66,7 +66,7 @@ class Calendar extends Component<Props> {
             && calendarDate.getYear() === selectedDate.getYear()
           }
           onChange={d => this.changeSelectedDate(d)}
-          fontColor={ theme === DARK ? COLOR_LIGHT : FONT_COLOR_DARK }
+          fontColor={theme === DARK ? COLOR_LIGHT : FONT_COLOR_DARK}
         />,
       );
       calendarDate.setDate(calendarDate.getDate() + 1);
