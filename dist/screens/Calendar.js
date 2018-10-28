@@ -46,7 +46,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 // eslint-disable-next-line
-window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
+global.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
 
 var Calendar =
 /*#__PURE__*/
@@ -197,7 +197,6 @@ function (_Component) {
         }, this.getWeekDays(startingDate)));
       }
 
-      console.log('s');
       return _react.default.createElement("div", null, _react.default.createElement("div", {
         className: "main-calendar-container",
         style: {

@@ -21,7 +21,7 @@ import WeekHeader from './WeekHeader';
 
 
 // eslint-disable-next-line
-window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
+global.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
 
 type Props = {
   onSelect: () => Date,
@@ -160,7 +160,6 @@ class Calendar extends Component<Props> {
         </div>,
       );
     }
-    console.log('s');
 
     return (
       <div>
