@@ -23,6 +23,8 @@ var _CalendarConstant = require("./CalendarHelper/CalendarConstant");
 
 var _WeekHeader = _interopRequireDefault(require("./WeekHeader"));
 
+var _CalendarConstant2 = require("../../../../node_modules/react-nepali-date-picker/dist/screens/CalendarHelper/CalendarConstant");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
@@ -70,7 +72,8 @@ function (_Component) {
       monthList: monthList,
       currentMonth: monthList[date.getMonth()],
       currentYear: date.getYear(),
-      selectedDate: selectedDate
+      selectedDate: selectedDate,
+      yearList: date.getYearList()
     };
     return _this;
   }
@@ -83,17 +86,19 @@ function (_Component) {
       var _this$state = this.state,
           date = _this$state.date,
           selectedDate = _this$state.selectedDate,
-          theme = _this$state.theme;
+          theme = _this$state.theme,
+          dateType = _this$state.dateType;
       var days = [];
       var calendarDate = currentDate;
 
       for (var c = 0; c < 7; c += 1) {
+        var calendarYear = dateType === _CalendarConstant2.DATE_TYPE_AD ? calendarDate.getFullYear() : calendarDate.getYear();
         days.push(_react.default.createElement(_Day.default, {
           key: calendarDate,
           date: (0, _lodash.clone)(calendarDate),
           value: calendarDate.getDate(),
           isCurrentMonth: date.getMonth() === calendarDate.getMonth(),
-          isSelectedDate: date.getMonth() === selectedDate.getMonth() && calendarDate.getDate() === selectedDate.getDate() && calendarDate.getYear() === selectedDate.getYear(),
+          isSelectedDate: date.getMonth() === selectedDate.getMonth() && calendarDate.getDate() === selectedDate.getDate() && calendarYear === selectedDate.getYear(),
           onChange: function onChange(d) {
             return _this2.changeSelectedDate(d);
           },
@@ -113,12 +118,15 @@ function (_Component) {
       var monthList = _CalendarConstant.DATE_TYPE_BS === dateType ? _CalendarConstant.nepaliMonth : _CalendarConstant.englishMonth;
       var currentMonth = _CalendarConstant.DATE_TYPE_BS === dateType ? _CalendarConstant.nepaliMonth[date.getMonth()] : _CalendarConstant.englishMonth[date.getMonth()];
       var currentYear = date.getYear();
+      var yearList = date.getYearList();
       this.setState({
         dateType: dateType,
         date: date,
         monthList: monthList,
         currentMonth: currentMonth,
-        currentYear: currentYear
+        currentYear: currentYear,
+        yearList: yearList,
+        selectedDate: date
       });
     }
   }, {
@@ -168,11 +176,11 @@ function (_Component) {
           currentYear = _this$state3.currentYear,
           currentMonth = _this$state3.currentMonth,
           selectedDate = _this$state3.selectedDate,
-          theme = _this$state3.theme;
+          theme = _this$state3.theme,
+          yearList = _this$state3.yearList;
       var _this$props = this.props,
           onCancel = _this$props.onCancel,
           onChange = _this$props.onChange;
-      var yearList = date.getYearList();
       var startingDate = date.getStartingDate();
       var calendarData = [];
 

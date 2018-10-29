@@ -29,7 +29,11 @@ function () {
   _createClass(EnglishCalendar, [{
     key: "getStartingDate",
     value: function getStartingDate() {
-      return (0, _calendarHelper.getStartingDate)(this.date);
+      var date = (0, _lodash.clone)(this.date);
+      date.setDate(1);
+      var day = -Math.abs(date.getDay()) + 1;
+      date.setDate(day);
+      return date;
     }
   }, {
     key: "getCurrentMonth",

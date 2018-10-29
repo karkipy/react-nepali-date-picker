@@ -18,6 +18,7 @@ import {
   FONT_COLOR_DARK,
 } from './CalendarHelper/CalendarConstant';
 import WeekHeader from './WeekHeader';
+import { DATE_TYPE_AD } from '../../../../node_modules/react-nepali-date-picker/dist/screens/CalendarHelper/CalendarConstant';
 
 
 // eslint-disable-next-line
@@ -46,15 +47,17 @@ class Calendar extends Component<Props> {
       currentMonth: monthList[date.getMonth()],
       currentYear: date.getYear(),
       selectedDate,
+      yearList: date.getYearList(),
     };
   }
 
 
   getWeekDays(currentDate) {
-    const { date, selectedDate, theme } = this.state;
+    const { date, selectedDate, theme, dateType } = this.state;
     const days = [];
     const calendarDate = currentDate;
     for (let c = 0; c < 7; c += 1) {
+      const calendarYear = dateType === DATE_TYPE_AD ? calendarDate.getFullYear() : calendarDate.getYear();
       days.push(
         <Day
           key={calendarDate}
@@ -63,7 +66,7 @@ class Calendar extends Component<Props> {
           isCurrentMonth={date.getMonth() === calendarDate.getMonth()}
           isSelectedDate={date.getMonth() === selectedDate.getMonth()
             && calendarDate.getDate() === selectedDate.getDate()
-            && calendarDate.getYear() === selectedDate.getYear()
+            && calendarYear === selectedDate.getYear()
           }
           onChange={d => this.changeSelectedDate(d)}
           fontColor={theme === DARK ? COLOR_LIGHT : FONT_COLOR_DARK}
@@ -84,12 +87,15 @@ class Calendar extends Component<Props> {
       ? nepaliMonth[date.getMonth()]
       : englishMonth[date.getMonth()];
     const currentYear = date.getYear();
+    const yearList = date.getYearList();
     this.setState({
       dateType,
       date,
       monthList,
       currentMonth,
       currentYear,
+      yearList,
+      selectedDate: date,
     });
   }
 
@@ -129,12 +135,10 @@ class Calendar extends Component<Props> {
       currentMonth,
       selectedDate,
       theme,
+      yearList,
     } = this.state;
     const { onCancel, onChange } = this.props;
-    const yearList = date.getYearList();
     const startingDate = date.getStartingDate();
-
-
     const calendarData = [];
     for (let r = 0; r < NUM_OF_WEEKS; r += 1) {
       const calendarRow = (

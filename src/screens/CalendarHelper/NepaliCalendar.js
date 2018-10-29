@@ -10,8 +10,13 @@ class NepaliCalendar implements Calendar {
   }
 
   getStartingDate() {
-    return getStartingDate(this.date);
+    const date = clone(this.date);
+    date.setDate(1);
+    const day = -Math.abs(date.getDay()) + 1;
+    date.setDate(day);
+    return date;
   }
+
 
   getCurrentMonth() {
     return nepaliMonth[this.date.getMonth()];
