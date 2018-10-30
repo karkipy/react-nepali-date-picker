@@ -63,7 +63,7 @@ import Calendar from 'react-nepali-date-picker';
   <Calendar
     onSelect={(s) => console.log(s)}
     onChange={(s) => console.log(s)}
-    onCancel={(d) => console.log(d)}
+    onCancel={(s) => console.log(s)}
     theme="light"
   />
 ```
@@ -73,6 +73,12 @@ resulting in
 
 
 ![screen shot 2018-10-24 at 1 57 07 pm](https://user-images.githubusercontent.com/12614476/47416976-a0f0c500-d796-11e8-9c9a-823e9dd8e08a.png)
+
+The resulting value s for each function call back has property as:
+
+  1) getYear(): gives year in number
+  2) getMonth(): gives Month in number
+  3) getDate(): gives the date in number
 
 
 
