@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Calendar from 'react-nepali-date-picker';
 
-
 function App() {
   const [date, setDate] = useState(new Date());
   return (
