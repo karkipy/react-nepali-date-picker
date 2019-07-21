@@ -32,7 +32,7 @@ commands to run demo app
 
 ## Styling
 
-Add this to your application css to change calendar styling
+Add this to your application css to change calendar styling, use this to change width, font color and background color of the calendar in your app.
 
 1. .calendar-container: the main container of the calendar that wraps everything, add background color to the calendar
 
