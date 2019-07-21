@@ -1,0 +1,13 @@
+{
+  "name": "react-nepali-date-picker",
+  "version": "0.1.4",
+  "description": "React date Picker for both BS and AD calendar",
+  "main": "index.js",
+  "repository": "git@github.com:karkipy/react-nepali-date-picker.git",
+  "author": "Aashish Karki <aashish.y2z@gmail.com>",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=16.8.3",
+    "react-dom": ">=16.8.6"
+  }
+}
