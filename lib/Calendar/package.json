@@ -1,6 +1,6 @@
 {
   "name": "react-nepali-date-picker",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "React date Picker for both BS and AD calendar",
   "main": "dist/index.js",
   "module": "dist/index.js",
