@@ -1,85 +1,71 @@
 # react-nepali-date-picker
 
-### Introduction
+## Introduction
 
 React Nepali Date Picker is a widget for react , this is a typical calendar picker , but provides the option to switch calendar type from B.S to A.D.
 
-### installation
+
+
+
+## Installation
 
 ```javascript
 npm i react-nepali-date-picker
 ```
 
-###parameters
+## Parameters
 
 Calendar can be used to act as an input component as well. All the parameters are optional
+1) value : send the date from which to show calendar with else default is the current date
+2) onSelect : returns the value that has been selected or the date that user has clicked on
 
-1) theme : type of theme i.e. dark or light default is dark
-2) value : send the date from which to show calendar with else default is the current date
-3) onSelect : returns the value that has been selected or the date that user has clicked on
-4) onChange : returns the value user has selected and when the ok button is clicked
-5) onCancel : returns previous value which user had previously selected
 
-onChange and onCancel are required to display the OK and cancel button
+## Demo
 
-### usage
+commands to run demo app
+
+```javascript
+  yarn
+  cd app
+  yarn start
+```
+
+## Styling
+
+Add this to your application css to change calendar styling
+
+1. .calendar-container: the main container of the calendar that wraps everything, add background color to the calendar
+
+2. .calendar-header: the bar that contains the BS to Ad, month and year switcher
+
+3. .week-header: the bar that contains the days of a week such as sun, mon , tue
+
+4. .day-title: this element contains the individual component of week header, this wraps individual
+sun, mon, etc.
+
+5. .week: this is the container for individual week
+
+6. .day: this is the container for actual date of a day in the calendar such as 1,2,3, 4, ....
+
+7. active: css for the date that was actually selected
+
+8. .disabled: css for date that are not of this month
+
+## Usage
 
 ```javascript
 
+import React, { useState } from 'react';
 import Calendar from 'react-nepali-date-picker';
 
-  <Calendar />
+
+function App() {
+  const [value, setValue] = useState(new Date());
+  return (
+    <Calendar value={value} onSelect={setValue} />
+  )
+}
+
 ```
-
-will result in
-
-![screen shot 2018-10-24 at 2 08 09 pm](https://user-images.githubusercontent.com/12614476/47416846-4a838680-d796-11e8-968d-78259c7a4bee.png)
-
-
-using as an input component pass onChange and onCancel
-
-
-```javascript
-import Calendar from 'react-nepali-date-picker';
-
-  <Calendar
-    onSelect={(s) => console.log(s)}
-    onChange={(s) => console.log(s)}
-    onCancel={(d) => console.log(d)}
-
-  />
-```
-
-and will result in
-
-
-![screen shot 2018-10-24 at 1 57 40 pm](https://user-images.githubusercontent.com/12614476/47416940-861e5080-d796-11e8-93b0-a22293cbd366.png)
-
-
-using theme
-```javascript
-import Calendar from 'react-nepali-date-picker';
-
-  <Calendar
-    onSelect={(s) => console.log(s)}
-    onChange={(s) => console.log(s)}
-    onCancel={(s) => console.log(s)}
-    theme="light"
-  />
-```
-
-
-resulting in
-
-
-![screen shot 2018-10-24 at 1 57 07 pm](https://user-images.githubusercontent.com/12614476/47416976-a0f0c500-d796-11e8-9c9a-823e9dd8e08a.png)
-
-The resulting value s for each function call back has property as:
-
-  1) getYear(): gives year in number
-  2) getMonth(): gives Month in number
-  3) getDate(): gives the date in number
-
-
 
 
