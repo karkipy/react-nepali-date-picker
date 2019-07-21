@@ -39,5 +39,9 @@
     "rimraf": "^2.6.2",
     "webpack": "^4.32.2",
     "webpack-cli": "^3.3.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/karkipy/react-nepali-date-picker.git "
   }
 }
