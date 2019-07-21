@@ -1,12 +1,12 @@
-import React from 'react';
-// import TypeAhead from 'typeahead-lib';
-import './App.css';
+import React, { useState } from 'react';
+import Calendar from 'react-nepali-date-picker';
 
 
 function App() {
+  const [date, setDate] = useState(new Date());
   return (
     <div style={{ margin: '100px', width: '600px' }}>
-      {/* <TypeAhead options={['Apple', 'Aeroplane', 'Ball', 'Basker']} /> */}
+      <Calendar value={date} onSelect={setDate} />
     </div>
   );
 }
