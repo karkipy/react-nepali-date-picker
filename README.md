@@ -40,16 +40,18 @@ Add this to your application css to change calendar styling, use this to change 
 
 3. .week-header: the bar that contains the days of a week such as sun, mon , tue
 
-4. .day-title: this element contains the individual component of week header, this wraps individual
+4. .weeks-container: this element contains the actual dates of the calendar
+
+5. .day-title: this element contains the individual component of week header, this wraps individual
 sun, mon, etc.
 
-5. .week: this is the container for individual week
+6. .week: this is the container for individual week
 
-6. .day: this is the container for actual date of a day in the calendar such as 1,2,3, 4, ....
+7. .day: this is the container for actual date of a day in the calendar such as 1,2,3, 4, ....
 
-7. .selected: css for the date that was actually selected
+8. .selected: css for the date that was actually selected
 
-8. .disabled: css for date that are not of this month
+9. .disabled: css for date that are not of this month
 
 ## Usage
 
