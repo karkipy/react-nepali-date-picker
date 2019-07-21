@@ -47,7 +47,7 @@ sun, mon, etc.
 
 6. .day: this is the container for actual date of a day in the calendar such as 1,2,3, 4, ....
 
-7. active: css for the date that was actually selected
+7. .selected: css for the date that was actually selected
 
 8. .disabled: css for date that are not of this month
 
