@@ -34,12 +34,13 @@
   display: flex;
   flex: 1;
   justify-content: center;
+  color: inherit;
   background: inherit;
   border: none;
   font-size: 16px;
 }
 
-.active {
+.selected {
   background: blue;
   color: white;
 }
